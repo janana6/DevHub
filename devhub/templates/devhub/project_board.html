@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Project Board</h2>
+    <a href="{% url 'project_create' %}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>New Project</a>
+</div>
+
+<div class="row g-4">
+    <!-- Idea Column -->
+    <div class="col-md-4">
+        <div class="card border-secondary bg-body-tertiary h-100">
+            <div class="card-header bg-secondary text-white fw-bold">Idea</div>
+            <div class="card-body">
+                {% for project in idea_projects %}
+                    {% include 'devhub/components/project_card.html' %}
+                {% empty %}
+                    <p class="text-muted text-center py-3">No ideas queued up.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Building Column -->
+    <div class="col-md-4">
+        <div class="card border-primary bg-body-tertiary h-100">
+            <div class="card-header bg-primary text-white fw-bold">Building</div>
+            <div class="card-body">
+                {% for project in building_projects %}
+                    {% include 'devhub/components/project_card.html' %}
+                {% empty %}
+                    <p class="text-muted text-center py-3">No active projects being built.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Done Column -->
+    <div class="col-md-4">
+        <div class="card border-success bg-body-tertiary h-100">
+            <div class="card-header bg-success text-white fw-bold">Done</div>
+            <div class="card-body">
+                {% for project in done_projects %}
+                    {% include 'devhub/components/project_card.html' %}
+                {% empty %}
+                    <p class="text-muted text-center py-3">No completed projects yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
