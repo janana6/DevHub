@@ -2,6 +2,8 @@
 
 A clean, focused personal workspace built with **Python 3.14.3+**, **Django 5**, **PostgreSQL**, and **Bootstrap 5**. DevHub strips away unnecessary gamification (streaks, habits, point systems) to provide a practical portfolio manager and daily development log.
 
+**Live Demo:** [https://devhub-ow2x.onrender.com](https://devhub-ow2x.onrender.com)
+
 ---
 
 ## Features
@@ -21,6 +23,46 @@ A clean, focused personal workspace built with **Python 3.14.3+**, **Django 5**,
 - **Backend:** Python 3.12+ / Django 5
 - **Database:** PostgreSQL (`psycopg` / `psycopg2`)
 - **Frontend:** HTML5, Jinja/Django Templates, Bootstrap 5 (Dark Theme) + Bootstrap Icons
+
+---
+
+##  Quick Start (Local Setup)
+
+```bash
+# 1. Clone & enter directory
+git clone https://github.com/janana6/devhub.git && cd devhub
+
+# 2. Virtual environment & dependencies
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+
+# 3. Environment setup (.env file)
+echo "SECRET_KEY=dev-secret-key
+DEBUG=True
+DATABASE_URL=sqlite:///db.sqlite3" > .env
+
+# 4. Migrate & run server
+python manage.py migrate
+python manage.py runserver
+```
+---
+
+##  Deployment (Render)
+
+DevHub is production-ready and configured for deployment on [Render](https://render.com/).
+
+* **Build Command:**
+  ```bash
+  pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+  ```
+* **Start Command:**
+  ```bash
+  gunicorn config.wsgi:application
+  ```
+* **Required Environment Variables on Render:**
+  * `SECRET_KEY`: A secure random production key.
+  * `DEBUG`: `False`
+  * `DATABASE_URL`: Internal PostgreSQL database URL provided by Render.
 
 ---
 
